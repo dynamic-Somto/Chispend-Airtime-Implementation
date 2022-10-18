@@ -1,7 +1,12 @@
+import 'package:chispend/di/get_it.dart';
 import 'package:chispend/presentation/ui/webview/index.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
-void main() {
+import 'data/services/navigation/index.dart';
+
+void main() async{
+  await initDependencies();
   runApp(const MyApp());
 }
 
@@ -11,12 +16,17 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light
+        .copyWith(
+        statusBarIconBrightness: Brightness.dark,
+        statusBarColor: Colors.white));
     return MaterialApp(
       title: 'ChiSpend',
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.white,
         primarySwatch: Colors.purple
       ),
+      navigatorKey: getItInstance<NavigationServiceImpl>().navigationKey,
       debugShowCheckedModeBanner: false,
       home: const ChiSpendWebView(),
     );
