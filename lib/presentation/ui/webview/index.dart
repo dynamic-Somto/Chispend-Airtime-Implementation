@@ -12,9 +12,9 @@ class ChiSpendWebView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChiSpendWidget(
       maxAmountInUSD: 1000,
-      onMessageReceived: (v) {
+      onMessageReceived: (v) async{
         loader(context);
-        getItInstance<PayoutServiceImpl>().initiateChimoney(channelStr: v);
+        await getItInstance<PayoutServiceImpl>().initiateChimoney(channelStr: v);
         getItInstance<NavigationServiceImpl>().pop();
       },
     );
